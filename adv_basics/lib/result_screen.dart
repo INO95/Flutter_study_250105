@@ -13,7 +13,8 @@ class ResultScreen extends StatelessWidget {
   final void Function() onRestart;
   final List<String> chosenAnswers;
 
-  List<Map<String, Object>> getSummaryData() {
+  // 커스텀 get 메서드 형식으로 사용하기
+  List<Map<String, Object>> get summaryData {
     final List<Map<String, Object>> summary = [];
 
     for (var i = 0; i < chosenAnswers.length; i++) {
@@ -27,6 +28,20 @@ class ResultScreen extends StatelessWidget {
 
     return summary;
   }
+  //   List<Map<String, Object>> getSummaryData() {
+  //   final List<Map<String, Object>> summary = [];
+
+  //   for (var i = 0; i < chosenAnswers.length; i++) {
+  //     summary.add({
+  //       'question_index': i,
+  //       'question': questions[i].text,
+  //       'correct_answer': questions[i].answers[0],
+  //       'user_answer': chosenAnswers[i]
+  //     });
+  //   }
+
+  //   return summary;
+  // }
 
   void restartQuiz() {
     chosenAnswers.length = 0;
@@ -34,11 +49,17 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(context) {
-    final summaryData = getSummaryData();
+    // final summaryData = getSummaryData();
     final numTotalQuestions = questions.length;
-    final numCorrectQuestions = summaryData.where((data) {
-      return data['user_answer'] == data['correct_answer'];
-    }).length;
+    // 화살표 함수 사용하기
+    final numCorrectQuestions = summaryData
+        .where(
+          (data) => data['user_answer'] == data['correct_answer'],
+        )
+        .length;
+    //     final numCorrectQuestions = summaryData.where((data) {
+    //   return data['user_answer'] == data['correct_answer'];
+    // }).length;
 
     return SizedBox(
       width: double.infinity,

@@ -13,6 +13,7 @@ class Quiz extends StatefulWidget {
   }
 }
 
+// 클래스, 메서드, 변수 등의 앞에 "_" 가 붙어있으면, private라고 해석하면 된다.
 class _QuizState extends State<Quiz> {
   List<String> selectedAnswers = [];
   var activeScreen = 'start-screen';
