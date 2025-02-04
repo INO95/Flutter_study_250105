@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/meal.dart';
+import 'package:meals/screens/meal_details.dart';
 import 'package:meals/widgets/meal_item.dart';
 
+// 메뉴 화면
 class MealsScreen extends StatelessWidget {
   const MealsScreen({
     super.key,
@@ -11,6 +13,17 @@ class MealsScreen extends StatelessWidget {
 
   final String title;
   final List<Meal> meals;
+
+  // 메뉴 선택 시 처리
+  void selectMeal(BuildContext context, Meal meal) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => MealDetailsScreen(
+          meal: meal,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +48,17 @@ class MealsScreen extends StatelessWidget {
       ),
     );
 
+    // 메뉴가 있는 경우 content를 목록으로 변경
     if (meals.isNotEmpty) {
       content = ListView.builder(
         itemCount: meals.length,
-        itemBuilder: (ctx, index) => MealItem(meal: meals[index]),
+        // 목록 아이템 생성
+        itemBuilder: (ctx, index) => MealItem(
+          meal: meals[index],
+          onSelectMeal: (context, meal) {
+            selectMeal(context, meal);
+          },
+        ),
       );
     }
 

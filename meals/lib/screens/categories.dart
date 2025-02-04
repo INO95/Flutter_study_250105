@@ -4,14 +4,18 @@ import 'package:meals/models/category.dart';
 import 'package:meals/screens/meals.dart';
 import 'package:meals/widgets/category_grid_item.dart';
 
+// 카테고리 화면
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
 
+  // 카테고리가 선택되었을 때의 처리
   void _selectCategory(BuildContext context, Category category) {
+    // 매개변수로 받은 카테고리의 id를 이용하여 filteredMeals 리스트를 생성
     final filteredMeals = dummyMeals
         .where((meal) => meal.categories.contains(category.id))
         .toList();
 
+    // Navigator.of를 사용하여 화면을 해당 카테고리의 메뉴 화면으로 이동
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => MealsScreen(
@@ -24,26 +28,17 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 일반적으로 대부분의 앱은 기본적으로 Scaffold를 사용합니다.
     return Scaffold(
-      // AppBar는 화면 상단에 위치하며, 앱의 이름이나 현재 화면의 제목을 표시합니다.
       appBar: AppBar(
         title: const Text('Pick your category'),
       ),
-      // body는 화면의 주요 콘텐츠를 표시합니다.
+      // 그리드 형태의 레이아웃을 사용하여 카테고리 아이템을 표시
       body: GridView(
         padding: const EdgeInsets.all(24),
-        // GridView는 그리드 형태의 레이아웃을 표시합니다.
-        gridDelegate:
-            // SliverGridDelegateWithFixedCrossAxisCount는 그리드의 열의 개수를 고정된 값으로 설정합니다.
-            const SliverGridDelegateWithFixedCrossAxisCount(
-          // crossAxisCount는 그리드의 열의 개수를 설정합니다.
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          // childAspectRatio는 그리드의 아이템의 가로 세로 비율을 설정합니다.
           childAspectRatio: 3 / 2,
-          // crossAxisSpacing는 그리드의 열 사이의 간격을 설정합니다.
           crossAxisSpacing: 20,
-          // mainAxisSpacing는 그리드의 행 사이의 간격을 설정합니다.
           mainAxisSpacing: 20,
         ),
         children: [
@@ -51,6 +46,7 @@ class CategoriesScreen extends StatelessWidget {
           for (final category in availableCategories)
             CategoryGridItem(
               category: category,
+              // 카테고리가 선택되었을 때의 처리
               onSelectedCategory: () {
                 _selectCategory(context, category);
               },
