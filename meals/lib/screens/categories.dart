@@ -28,31 +28,25 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pick your category'),
+    return GridView(
+      padding: const EdgeInsets.all(24),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 3 / 2,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
       ),
-      // 그리드 형태의 레이아웃을 사용하여 카테고리 아이템을 표시
-      body: GridView(
-        padding: const EdgeInsets.all(24),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-        ),
-        children: [
-          // avaliableCategories.map((category) => CategoryGridItem(category: category)).toList(),
-          for (final category in availableCategories)
-            CategoryGridItem(
-              category: category,
-              // 카테고리가 선택되었을 때의 처리
-              onSelectedCategory: () {
-                _selectCategory(context, category);
-              },
-            ),
-        ],
-      ),
+      children: [
+        // avaliableCategories.map((category) => CategoryGridItem(category: category)).toList(),
+        for (final category in availableCategories)
+          CategoryGridItem(
+            category: category,
+            // 카테고리가 선택되었을 때의 처리
+            onSelectedCategory: () {
+              _selectCategory(context, category);
+            },
+          ),
+      ],
     );
   }
 }

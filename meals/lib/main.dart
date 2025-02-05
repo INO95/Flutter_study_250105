@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meals/screens/categories.dart';
+import 'package:meals/screens/tabs.dart';
 
 // 테마 설정
 final theme = ThemeData(
@@ -26,7 +26,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: theme,
       // 첫 화면 : 카테고리 화면
-      home: const CategoriesScreen(),
+      home: const TabsScreen(),
     );
   }
 }
