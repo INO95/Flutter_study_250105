@@ -10,13 +10,15 @@ class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({
     super.key,
     required this.onToggleFavorite,
+    required this.availableMeals,
   });
 
   final void Function(Meal meal) onToggleFavorite;
+  final List<Meal> availableMeals;
   // 카테고리가 선택되었을 때의 처리
   void _selectCategory(BuildContext context, Category category) {
     // 매개변수로 받은 카테고리의 id를 이용하여 filteredMeals 리스트를 생성
-    final filteredMeals = dummyMeals
+    final filteredMeals = availableMeals
         .where((meal) => meal.categories.contains(category.id))
         .toList();
 
